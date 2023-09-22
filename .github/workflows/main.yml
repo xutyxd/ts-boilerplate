@@ -41,3 +41,4 @@ jobs:
           npx semantic-release --dry-run
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }} # Token for generate tags on the repo
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }} # Token for publish on npmjs.com
