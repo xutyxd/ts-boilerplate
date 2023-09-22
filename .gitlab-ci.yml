@@ -54,7 +54,7 @@ release:
   needs:
     - build
   script:
-    - npx semantic-release --dry-run
+    - npx semantic-release
   cache:
     key: ${CI_COMMIT_REF_SLUG}
     paths:
