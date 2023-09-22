@@ -28,6 +28,7 @@
     "type": "git",
     "url": "git+https://github.com/xutyxd/ts-boilerplate.git"
   },
+  "keywords": ["typescript", "hybrid", "mjs", "cjs", "boilerplate"],
   "author": "XutyXD",
   "license": "ISC",
   "bugs": {
