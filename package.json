@@ -1,5 +1,5 @@
 {
-  "name": "ts-boilerplate",
+  "name": "ts-hybrid-boilerplate",
   "version": "1.0.0",
   "description": "Another boilerplate for ts projects, especifically to ts npm packages",
   "type": "module",

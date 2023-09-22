@@ -1,4 +1,4 @@
-# TS Boilerplate
+# TS Hybrid Boilerplate
 Another boilerplate for ts projects, especifically to ts npm packages
 
 
