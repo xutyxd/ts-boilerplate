@@ -1,0 +1,47 @@
+### Generated with ChatGPT maybe has errors
+name: Build and Release
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+
+    container:
+      image: node:alpine
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Setup
+        run: |
+          npm install
+          npm ci --cache .npm
+        id: cache-deps
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-deps-${{ hashFiles('**/package-lock.json') }}
+
+      - name: Test
+        run: |
+          npm run test
+
+      - name: Build
+        run: |
+          npm run build
+        id: cache-build
+        with:
+          path: |
+            ./cjs
+            ./mjs
+          key: ${{ runner.os }}-build-${{ hashFiles('cjs/**', 'mjs/**') }}
+
+      - name: Release
+        run: |
+          npx semantic-release --dry-run
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }} # Token for generate tags on the repo
