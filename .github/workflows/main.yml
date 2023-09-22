@@ -9,13 +9,17 @@ on:
 jobs:
   build-and-release:
     runs-on: ubuntu-latest
-
-    container:
-      image: node:alpine
+    permissions:
+      contents: write # to be able to publish a GitHub release
+      issues: write # to be able to comment on released issues
+      pull-requests: write # to be able to comment on released pull requests
+      id-token: write # to enable use of OIDC for npm provenance
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
       - name: Setup
         run: |
@@ -34,9 +38,6 @@ jobs:
 
       - name: Release
         run: |
-          sudo apt update
-          sudo apt install git
-          git --version
           npx semantic-release --dry-run
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }} # Token for generate tags on the repo
