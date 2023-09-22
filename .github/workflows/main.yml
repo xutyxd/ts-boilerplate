@@ -22,9 +22,9 @@ jobs:
           npm install
           npm ci --cache .npm
         id: cache-deps
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-deps-${{ hashFiles('**/package-lock.json') }}
+        # with:
+        #   path: ~/.npm
+        #   key: ${{ runner.os }}-deps-${{ hashFiles('**/package-lock.json') }}
 
       - name: Test
         run: |
@@ -34,11 +34,11 @@ jobs:
         run: |
           npm run build
         id: cache-build
-        with:
-          path: |
-            ./cjs
-            ./mjs
-          key: ${{ runner.os }}-build-${{ hashFiles('cjs/**', 'mjs/**') }}
+        # with:
+        #   path: |
+        #     ./cjs
+        #     ./mjs
+        #   key: ${{ runner.os }}-build-${{ hashFiles('cjs/**', 'mjs/**') }}
 
       - name: Release
         run: |
