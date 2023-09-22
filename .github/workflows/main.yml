@@ -22,9 +22,6 @@ jobs:
           npm install
           npm ci --cache .npm
         id: cache-deps
-        # with:
-        #   path: ~/.npm
-        #   key: ${{ runner.os }}-deps-${{ hashFiles('**/package-lock.json') }}
 
       - name: Test
         run: |
@@ -34,14 +31,12 @@ jobs:
         run: |
           npm run build
         id: cache-build
-        # with:
-        #   path: |
-        #     ./cjs
-        #     ./mjs
-        #   key: ${{ runner.os }}-build-${{ hashFiles('cjs/**', 'mjs/**') }}
 
       - name: Release
         run: |
+          sudo apt update
+          sudo apt install git
+          git --version
           npx semantic-release --dry-run
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }} # Token for generate tags on the repo
